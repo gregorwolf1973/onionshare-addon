@@ -1,0 +1,6 @@
+#!/usr/bin/execlineb -S0
+# Tor exited - log it but don't bring down the whole addon
+foreground { s6-echo "[tor] service exited with code ${1}" }
+# Restart unless asked to shut down
+if -n { s6-test ${1} -eq 256 }
+exit 0

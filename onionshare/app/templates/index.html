@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="./">
+  <title>OnionShare</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header>
+    <h1>🧅 OnionShare</h1>
+    <div id="tor-status" class="status-pill">Checking Tor…</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>New session</h2>
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="share">📤 Share</button>
+        <button class="mode-tab" data-mode="receive">📥 Receive</button>
+        <button class="mode-tab" data-mode="website">🌐 Website</button>
+        <button class="mode-tab" data-mode="chat">💬 Chat</button>
+      </div>
+
+      <div id="mode-description" class="mode-desc">
+        Pick files or folders to share. Recipients get a one-time download link.
+      </div>
+
+      <div id="picker-section">
+        <div class="picker-toolbar">
+          <select id="root-select">
+            <option value="share">/share</option>
+            <option value="media">/media</option>
+            <option value="backup">/backup (read-only)</option>
+            <option value="config">/config</option>
+          </select>
+          <button id="up-btn" class="btn-secondary">⬆ Up</button>
+          <span id="current-path" class="path-display">/share</span>
+        </div>
+        <ul id="file-list" class="file-list"></ul>
+        <div class="selected-files">
+          <strong>Selected:</strong>
+          <ul id="selected-list"></ul>
+        </div>
+      </div>
+
+      <div class="options-row">
+        <label>
+          <input type="checkbox" id="opt-public">
+          <span>Public (no private key required)</span>
+        </label>
+        <input type="text" id="opt-title" placeholder="Custom title (optional)">
+        <input type="text" id="opt-label" placeholder="Session label (for your reference)">
+      </div>
+
+      <button id="start-btn" class="btn-primary">▶ Start session</button>
+    </section>
+
+    <section class="card">
+      <h2>Active sessions</h2>
+      <div id="sessions-list">
+        <div class="empty">No active sessions.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="static/app.js"></script>
+</body>
+</html>

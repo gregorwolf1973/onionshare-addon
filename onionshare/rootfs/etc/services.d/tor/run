@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the Tor daemon
+# ==============================================================================
+bashio::log.info "Starting Tor daemon..."
+exec /usr/bin/tor -f /etc/tor/torrc

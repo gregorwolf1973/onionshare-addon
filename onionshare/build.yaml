@@ -1,0 +1,8 @@
+build_from:
+  aarch64: ghcr.io/hassio-addons/base:15.0.7
+  amd64: ghcr.io/hassio-addons/base:15.0.7
+labels:
+  org.opencontainers.image.title: "OnionShare add-on"
+  org.opencontainers.image.description: "Share & receive files anonymously via Tor"
+  org.opencontainers.image.source: "https://github.com/gregorwolf1973/onionshare-addon"
+  org.opencontainers.image.licenses: "MIT"

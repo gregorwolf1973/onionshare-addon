@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the OnionShare Flask web UI
+# ==============================================================================
+bashio::log.info "Starting OnionShare web UI on port 8099..."
+
+export ONIONSHARE_DATA_DIR="/data/onionshare"
+export ONIONSHARE_CONFIG_DIR="/config/onionshare"
+export PERSISTENT_ONIONS="$(bashio::config 'persistent_onions')"
+
+mkdir -p "${ONIONSHARE_DATA_DIR}" "${ONIONSHARE_CONFIG_DIR}"
+
+cd /opt/onionshare-addon/app
+exec python3 -u server.py

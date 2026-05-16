@@ -1,0 +1,4 @@
+#!/usr/bin/execlineb -S0
+foreground { s6-echo "[flask] service exited with code ${1}" }
+# If flask dies, we want the whole addon to restart
+exec /run/s6/basedir/bin/halt
