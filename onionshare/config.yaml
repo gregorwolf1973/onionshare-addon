@@ -1,5 +1,5 @@
 name: OnionShare
-version: "0.1.0"
+version: "0.1.1"
 slug: onionshare
 description: Share & receive files, host websites and chat anonymously via Tor
 url: https://github.com/gregorwolf1973/onionshare-addon
@@ -34,4 +34,3 @@ schema:
   persistent_onions: bool
   bridges_enabled: bool
   bridges: str
-image: ghcr.io/gregorwolf1973/onionshare-addon-{arch}
