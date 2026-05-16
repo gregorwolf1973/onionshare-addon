@@ -253,9 +253,7 @@ function renderSessions(sessions) {
       copyBtn.className = 'copy-btn';
       copyBtn.textContent = 'Copy';
       copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(s.onion_url);
-        copyBtn.textContent = '✓';
-        setTimeout(() => copyBtn.textContent = 'Copy', 1500);
+        copyToClipboard(s.onion_url, copyBtn);
       });
       urlBox.appendChild(copyBtn);
       div.appendChild(urlBox);
@@ -263,7 +261,12 @@ function renderSessions(sessions) {
       if (s.private_key) {
         const keyBox = document.createElement('div');
         keyBox.className = 'onion-url-box';
-        keyBox.innerHTML = `<small style="color: var(--text-dim)">Private key (needed to access):</small><br>${escapeHtml(s.private_key)}`;
+        keyBox.innerHTML = `<small style="color: var(--text-dim)">Private key (needed to access):</small><br><span class="key-value">${escapeHtml(s.private_key)}</span>`;
+        const copyKey = document.createElement('button');
+        copyKey.className = 'copy-btn';
+        copyKey.textContent = 'Copy';
+        copyKey.addEventListener('click', () => copyToClipboard(s.private_key, copyKey));
+        keyBox.appendChild(copyKey);
         div.appendChild(keyBox);
       }
     }
@@ -290,6 +293,34 @@ function renderSessions(sessions) {
       }
     });
   });
+}
+
+// Copy with HTTPS-clipboard-API + execCommand fallback. HA Ingress runs over
+// HTTP, where navigator.clipboard is undefined, so the fallback is required.
+function copyToClipboard(text, btn) {
+  const flash = (ok) => {
+    const orig = btn.textContent;
+    btn.textContent = ok ? '✓ copied' : '✗ failed';
+    setTimeout(() => { btn.textContent = orig === '✓ copied' || orig === '✗ failed' ? 'Copy' : orig; }, 1500);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => flash(true), () => fallback());
+  } else {
+    fallback();
+  }
+  function fallback() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    flash(ok);
+  }
 }
 
 function escapeHtml(s) {

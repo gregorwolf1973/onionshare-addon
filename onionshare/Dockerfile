@@ -51,5 +51,5 @@ LABEL \
     io.hass.description="Share & receive files anonymously via Tor" \
     io.hass.arch="aarch64|amd64" \
     io.hass.type="addon" \
-    io.hass.version="0.1.0" \
+    io.hass.version="0.1.2" \
     maintainer="gregorwolf1973"

@@ -132,4 +132,10 @@ onionshare/
 - [ ] Show Tor bootstrap progress %, not just up/down
 - [ ] Auto-stop sessions after N hours (configurable)
 - [ ] Direct upload-to-share for small files (don't require browse)
-- [ ] Optional Buy Me a Coffee link in footer 😉
+- [x] ~~Optional Buy Me a Coffee link in footer~~ ☕
+
+## Support
+
+If this add-on saves you time, consider buying me a coffee:
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/gregorwolf1973)

@@ -317,3 +317,31 @@ select:focus, input:focus { outline: none; border-color: var(--accent); }
 }
 
 .hidden { display: none !important; }
+
+/* Footer with BMC button */
+.app-footer {
+  margin: 3rem auto 2rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  max-width: 1100px;
+}
+.app-footer .bmc-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: transform 0.15s ease;
+}
+.app-footer .bmc-link:hover { transform: translateY(-2px); }
+.app-footer .bmc-link img { display: block; border-radius: 6px; }
+.footer-links {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-links span { margin: 0 0.5rem; }
+
+.key-value { font-family: monospace; word-break: break-all; }
