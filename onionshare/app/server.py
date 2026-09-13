@@ -29,6 +29,7 @@ import subprocess
 import threading
 import time
 import uuid
+import socket
 from collections import deque
 from pathlib import Path
 
@@ -484,7 +485,26 @@ def api_session_log(sid):
 # ---------------------------------------------------------------------------
 
 
+def _install_safe_getfqdn():
+    """Keep the reverse DNS lookup during bind from killing the addon.
+
+    http.server calls socket.getfqdn() while binding. With host_network the
+    addon uses the router's DNS; a PTR record that is not valid UTF-8 then
+    raises UnicodeDecodeError and the addon never starts.
+    """
+    real_getfqdn = socket.getfqdn
+
+    def safe_getfqdn(name=""):
+        try:
+            return real_getfqdn(name)
+        except (UnicodeDecodeError, UnicodeError, OSError):
+            return name or "localhost"
+
+    socket.getfqdn = safe_getfqdn
+
+
 if __name__ == "__main__":
+    _install_safe_getfqdn()
     # Check onionshare-cli is callable
     if not shutil.which("onionshare-cli"):
         log.error("onionshare-cli not found in PATH!")
